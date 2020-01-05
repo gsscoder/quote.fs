@@ -1,0 +1,36 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".paket", ".paket", "{C62159FA-CD58-4ED5-A6D7-4C7A28612E64}"
+	ProjectSection(SolutionItems) = preProject
+		paket.dependencies = paket.dependencies
+	EndProjectSection
+EndProject
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "QuoteFs", "src/QuoteFs/QuoteFs.fsproj", "{1E74C0E7-E6F9-40D6-9D4D-8E16DAC28AAD}"
+EndProject
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "QuoteFs.CLI", "src/QuoteFs.CLI/QuoteFs.CLI.fsproj", "{ED8B8C86-3900-4F3D-B44A-E0FA5EA8393B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1E74C0E7-E6F9-40D6-9D4D-8E16DAC28AAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E74C0E7-E6F9-40D6-9D4D-8E16DAC28AAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E74C0E7-E6F9-40D6-9D4D-8E16DAC28AAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E74C0E7-E6F9-40D6-9D4D-8E16DAC28AAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED8B8C86-3900-4F3D-B44A-E0FA5EA8393B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED8B8C86-3900-4F3D-B44A-E0FA5EA8393B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED8B8C86-3900-4F3D-B44A-E0FA5EA8393B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED8B8C86-3900-4F3D-B44A-E0FA5EA8393B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B5807B57-ACF4-47E5-8140-4610F8129E17}
+	EndGlobalSection
+EndGlobal
