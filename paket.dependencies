@@ -1,6 +1,6 @@
 source https://api.nuget.org/v3/index.json
 
-nuget FSharp.Core
+nuget FSharp.Core 4.7.0
 nuget FSharp.Data 3.3.2
 nuget Thoth.Json.Net 3.6.0
 nuget CommandLineParser 2.7.82
