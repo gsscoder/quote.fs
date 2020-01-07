@@ -28,17 +28,17 @@ Copyright © Giacomo Stelluti Scala, 2019
 
 ## C# Sample
 
-`Query` static class is provided to supply a more convenient **C#** interface.
+`Query` static class is provided to supply a more convenient **C#** interface. You can use [CSharpx](https://github.com/gsscoder/csharpx) to consume in a more accessible and functional way `FSharpResult<T, TError>` type from **C#**.
 
 ```csharp
+using CSharpx.FSharp;
 using QuoteFs;
 
 foreach (var ticker in Query.MajorIndexes) {
     var result = Query.GetIndex(ticker);
-    if (result.IsOk) {
-        var index = result.ResultValue;
-        Console.WriteLine($"{index.Name} {index.Price}");
-    }
+    result.March(
+        index => Console.WriteLine($"{index.Name} {index.Price}"),
+        error => Console.WriteLine($"Trouble: {error}"));
 }
 ```
 
