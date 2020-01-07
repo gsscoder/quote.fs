@@ -2,17 +2,16 @@ namespace QuoteFs
 
 module Finance = 
 
-    open QuoteFs.FinancialModelingPrep
     open FSharp.Data
     open Thoth.Json.Net
+
+    let [<Literal>] baseUrl = "https://financialmodelingprep.com"
 
     let getStockQuoteAsync(symbol) =
         let url = sprintf "%s/api/v3/company/profile/%s" baseUrl symbol
         async {
             let! response = Http.AsyncRequestString url
-            return match Decode.Auto.fromString<quoteResponse> response with
-                    | Ok rawQuote -> Ok (toStockQuote rawQuote)
-                    | Error error -> Error error
+            return Decode.fromString StockQuote.Decoder response
         } |> Async.StartAsTask
 
     let getStockQuote(symbol) =
@@ -24,9 +23,7 @@ module Finance =
         let url = sprintf "%s/api/v3/majors-indexes/%s" baseUrl ticker
         async {
             let! response = Http.AsyncRequestString url
-            return match Decode.Auto.fromString<indexResponse> response with
-                    | Ok rawQuote -> Ok (toIndex rawQuote)
-                    | Error error -> Error error
+            return Decode.fromString Index.Decoder response
         } |> Async.StartAsTask
 
     let getIndex(ticker) =

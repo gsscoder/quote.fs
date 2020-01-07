@@ -12,8 +12,8 @@
     <PackageTags>stock;market;finance;api;library</PackageTags>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Parser.fs" />
     <Compile Include="Model.fs" />
-    <Compile Include="FinancialModelingPrep.fs" />
     <Compile Include="Finance.fs" />
     <Compile Include="Query.fs" />
   </ItemGroup>

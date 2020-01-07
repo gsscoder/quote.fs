@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "QuoteFs.CLI": {
+      "commandName": "Project"
+    }
+  }
+}
