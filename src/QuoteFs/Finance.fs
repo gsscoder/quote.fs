@@ -7,6 +7,13 @@ module Finance =
 
     let [<Literal>] baseUrl = "https://financialmodelingprep.com"
 
+    let majorIndexes =
+        [
+            ".DJI";  // Dow Jones
+            ".IXIC"; // Nasdaq
+            ".INX"   // S&P 500
+        ]
+
     let getStockQuoteAsync(symbol) =
         let url = sprintf "%s/api/v3/company/profile/%s" baseUrl symbol
         async {
@@ -30,10 +37,3 @@ module Finance =
         getIndexAsync(ticker)
         |> Async.AwaitTask
         |> Async.RunSynchronously
-
-    let majorIndexes =
-        [
-            ".DJI";  // Dow Jones
-            ".IXIC"; // Nasdaq
-            ".INX"   // S&P 500
-        ]
