@@ -9,3 +9,5 @@ type Query =
     static member GetIndex ticker = getIndex ticker
     static member GetStockQuoteAsync symbol = getStockQuoteAsync symbol
     static member GetStockQuote symbol = getStockQuote symbol
+    static member GetPriceAsync symbol = getPriceAsync symbol
+    static member GetPrice symbol = getPrice symbol
