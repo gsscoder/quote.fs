@@ -4,7 +4,7 @@ module internal Parser =
 
     open System.Text.RegularExpressions
 
-    let changeRegex = Regex(@"(?<=^\(\+|-).*(?=%)", RegexOptions.Compiled)
+    let private changeRegex = Regex(@"(?<=^\(\+|-).*(?=%)", RegexOptions.Compiled)
 
     // parses a string formatted as "(+0.42%)" to float
     let changePercent (value : string) =
