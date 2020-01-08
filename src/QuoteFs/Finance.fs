@@ -5,7 +5,8 @@ module Finance =
     open FSharp.Data
     open Thoth.Json.Net
 
-    let [<Literal>] baseUrl = "https://financialmodelingprep.com"
+    [<Literal>]
+    let private baseUrl = "https://financialmodelingprep.com"
 
     let majorIndexes =
         [
