@@ -37,3 +37,15 @@ module Finance =
             getStockQuoteAsync(symbol)
             |> Async.AwaitTask
             |> Async.RunSynchronously
+
+    let getPriceAsync symbol =
+        let url = sprintf "%s/api/v3/stock/real-time-price/%s" baseUrl symbol
+        async {
+            let! response = Http.AsyncRequestString url
+            return Decode.fromString (Decode.field "price" Decode.float) response
+        } |> Async.StartAsTask
+ 
+    let getPrice symbol =
+        getPriceAsync symbol
+        |> Async.AwaitTask
+        |> Async.RunSynchronously
