@@ -5,6 +5,7 @@
 tools/
 .paket/
 paket.lock
+.ionide/
 [Oo]bj/
 [Bb]in/
 .nuget/
