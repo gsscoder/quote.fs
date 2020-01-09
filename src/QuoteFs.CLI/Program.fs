@@ -27,7 +27,7 @@ let printIndex(index : Index) =
     true
 
 type options = {
-    [<Option('s', "symbol", HelpText = "Prints detail of stock quote (identified by its symbol)")>] symbol : string
+    [<Option('s', "symbol", HelpText = "Prints detail of a stock quote")>] symbol : string
 }
 
 [<Literal>]
