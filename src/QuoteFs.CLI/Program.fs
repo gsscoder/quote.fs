@@ -47,12 +47,18 @@ type options = {
                     then RealTimePrice
                     else Indexes // no quote given, means makor indexes
 
-
-
 [<Literal>]
 let exitOK = 0
 [<Literal>]
 let exitFail = 1
+
+let subCommand input fc fp =
+    match fc input with
+    | Ok data ->
+        fp data
+        exitOK
+    | _ ->
+        exitFail
 
 [<EntryPoint>]
 let main argv =
@@ -61,20 +67,9 @@ let main argv =
         | :? Parsed<options> as parsed -> 
                 match parsed.Value.getInfoType with
                     | RealTimePrice ->
-                        let symbol = parsed.Value.realTime
-                        let result = symbol |> getPrice
-                        match result with
-                        | Ok price ->
-                            printPrice symbol price
-                            exitOK
-                        | _ -> exitFail
+                        subCommand parsed.Value.realTime getPrice (printPrice parsed.Value.realTime)
                     | Symbol ->
-                        let result = parsed.Value.symbol |> getStockQuote
-                        match result with
-                        | Ok quote ->
-                            printQuote quote
-                            exitOK
-                        | _ -> exitFail
+                        subCommand parsed.Value.symbol getStockQuote printQuote
                     | _ ->
                         let results = majorIndexes |> Seq.map (fun index ->
                             let result = getIndex index
