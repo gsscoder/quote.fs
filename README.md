@@ -36,7 +36,7 @@ using QuoteFs;
 
 foreach (var ticker in Query.MajorIndexes) {
     var result = Query.GetIndex(ticker);
-    result.March(
+    result.Match(
         index => Console.WriteLine($"{index.Name} {index.Price}"),
         error => Console.WriteLine($"Trouble: {error}"));
 }
