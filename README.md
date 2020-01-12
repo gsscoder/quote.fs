@@ -88,7 +88,7 @@ val it : Result<QuoteFs.Index,string> = Ok { Ticker = ".DJI"
 ## Libraries
 
 - [FSharp.Data](https://github.com/fsharp/FSharp.Data)
-- [Thoth.Json.Net](https://github.com/thoth-org/Thoth.Json)
+- [Thoth.Json](https://github.com/thoth-org/Thoth.Json)
 - [CommandLineParser](https://github.com/commandlineparser/commandline)
 
 ## Tools
