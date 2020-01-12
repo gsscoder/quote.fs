@@ -24,6 +24,10 @@ let printPrice symbol price =
     item "Quote" symbol 0
     indent "Real Time Price" price
 
+let printCrypto ticker price =
+    item "Cryptocurrency" ticker 0
+    indent "Price" price
+
 let printIndex(index : Index) =
     item "Index" (sprintf "%s %s" index.Ticker index.Name) 0
     indent "Price" index.Price
@@ -34,17 +38,23 @@ type infoType =
     | Indexes
     | Symbol
     | RealTimePrice
+    | Crypto
 
 type options = {
-    [<Option('s', "symbol", HelpText ="Prints detail of a stock quote", SetName="symbol")>]
+    [<Option('s', "symbol", HelpText = "Prints the detail of a stock quote", SetName = "symbol")>]
     symbol : string
-    [<Option('r', "realtime-price", HelpText ="Prints real time price a stock quote", SetName="realtime-price")>]
+    [<Option('r', "realtime-price", HelpText = "Prints the real time price a stock quote", SetName = "realtime-price")>]
     realTime : string
+    [<Option('c', "crypto", HelpText = "Prints the price a cryptocurrency", SetName = "crypto")>]
+    crypto : string
+
 } with member this.getInfoType = 
                     if isNull this.symbol |> not
                     then Symbol
                     elif isNull this.realTime |> not
                     then RealTimePrice
+                    elif isNull this.crypto |> not
+                    then Crypto
                     else Indexes // no quote given, means makor indexes
 
 [<Literal>]
@@ -66,10 +76,12 @@ let main argv =
     match result  with
         | :? Parsed<options> as parsed -> 
                 match parsed.Value.getInfoType with
-                    | RealTimePrice ->
-                        subCommand parsed.Value.realTime getPrice (printPrice parsed.Value.realTime)
                     | Symbol ->
                         subCommand parsed.Value.symbol getStockQuote printQuote
+                    | RealTimePrice ->
+                        subCommand parsed.Value.realTime getPrice (printPrice parsed.Value.realTime)
+                    | Crypto ->
+                        subCommand parsed.Value.crypto getCrypto (printCrypto parsed.Value.crypto)
                     | _ ->
                         let results = majorIndexes |> Seq.map (fun index ->
                             let result = getIndex index

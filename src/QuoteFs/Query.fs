@@ -11,3 +11,5 @@ type Query =
     static member GetStockQuote symbol = getStockQuote symbol
     static member GetPriceAsync symbol = getPriceAsync symbol
     static member GetPrice symbol = getPrice symbol
+    static member GetCryptoAsync ticker = getCryptoAsync ticker
+    static member GetCrypto ticker = getCrypto ticker

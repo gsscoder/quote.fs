@@ -50,3 +50,15 @@ module Finance =
         getPriceAsync symbol
         |> Async.AwaitTask
         |> Async.RunSynchronously
+
+    let getCryptoAsync ticker =
+        let url = sprintf "%s/api/v3/cryptocurrency/%s" baseUrl ticker
+        async {
+            let! response = Http.AsyncRequestString url
+            return Decode.fromString (Decode.field "price" Decode.float) response
+        } |> Async.StartAsTask
+
+    let getCrypto ticker =
+        getCryptoAsync ticker
+        |> Async.AwaitTask
+        |> Async.RunSynchronously
