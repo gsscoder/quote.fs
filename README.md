@@ -19,11 +19,15 @@ $ dotnet build -c release
 quote 0.1.0-pre
 Copyright © Giacomo Stelluti Scala, 2019
 
-  -s, --symbol    Prints detail of stock quote (identified by its symbol)
+  -s, --symbol            Prints the detail of a stock quote
 
-  --help          Display this help screen.
+  -r, --realtime-price    Prints the real time price a stock quote
 
-  --version       Display version information.
+  -c, --crypto            Prints the price a cryptocurrency
+
+  --help                  Display this help screen.
+
+  --version               Display version information.
 ```
 
 ## C# Sample
