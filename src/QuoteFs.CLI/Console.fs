@@ -38,7 +38,7 @@ let item label (data : obj) indent =
         | :? string -> cprintf ConsoleColor.Green " %s" (data :?> string)
         | :? float -> cprintf ConsoleColor.Cyan " %s" ((data :?> float) |> currency default')
         | :? int32 ->  cprintf ConsoleColor.Cyan "%s" ((data :?> int32) |> currency truncated)
-        | _ ->  cprintf ConsoleColor.Cyan " %s" ((data :?> int64) |> currency truncated)
+        | _ ->  cprintf ConsoleColor.Cyan "%s" ((data :?> int64) |> currency truncated)
     br 1
 
 let shorten (str : string) n =

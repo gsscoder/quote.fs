@@ -1,7 +1,8 @@
 {
   "profiles": {
     "QuoteFs.CLI": {
-      "commandName": "Project"
+      "commandName": "Project",
+      "commandLineArgs": "-rMSFT"
     }
   }
 }

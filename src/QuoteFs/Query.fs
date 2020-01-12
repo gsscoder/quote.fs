@@ -5,6 +5,7 @@ open QuoteFs.Finance
 [<AbstractClass;Sealed>]
 type Query =
     static member MajorIndexes : seq<string> = majorIndexes |> Seq.map id
+    static member MajorCrypto : seq<string> = majorCrypto |> Seq.map id
     static member GetIndexAsync ticker = getIndexAsync ticker
     static member GetIndex ticker = getIndex ticker
     static member GetStockQuoteAsync symbol = getStockQuoteAsync symbol

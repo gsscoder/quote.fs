@@ -16,6 +16,15 @@ module Finance =
             ".INX"   // S&P 500
         ]
 
+    let majorCrypto =
+        [
+            "BTC"; // Bitcoin
+            "ETH"; // Ethereum
+            "XRP"; // Ripple
+            "LTC"; // Litecoin
+            "BHC"; // Bitcoin Cash
+        ]
+
     let getIndexAsync ticker =
         let url = sprintf "%s/majors-indexes/%s" (apiPath ()) ticker
         async {
