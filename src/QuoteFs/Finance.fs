@@ -5,8 +5,9 @@ module Finance =
     open FSharp.Data
     open Thoth.Json.Net
 
-    [<Literal>]
-    let private baseUrl = "https://financialmodelingprep.com"
+    let inline private apiPath () =
+        let baseUrl = "https://financialmodelingprep.com"
+        sprintf "%s/api/v3" baseUrl
 
     let majorIndexes =
         [
@@ -16,7 +17,7 @@ module Finance =
         ]
 
     let getIndexAsync ticker =
-        let url = sprintf "%s/api/v3/majors-indexes/%s" baseUrl ticker
+        let url = sprintf "%s/majors-indexes/%s" (apiPath ()) ticker
         async {
             let! response = Http.AsyncRequestString url
             return Decode.fromString Index.Decoder response
@@ -28,7 +29,7 @@ module Finance =
         |> Async.RunSynchronously
 
     let getStockQuoteAsync symbol =
-        let url = sprintf "%s/api/v3/company/profile/%s" baseUrl symbol
+        let url = sprintf "%s/company/profile/%s" (apiPath ()) symbol
         async {
             let! response = Http.AsyncRequestString url
             return Decode.fromString StockQuote.Decoder response
@@ -40,7 +41,7 @@ module Finance =
             |> Async.RunSynchronously
 
     let getPriceAsync symbol =
-        let url = sprintf "%s/api/v3/stock/real-time-price/%s" baseUrl symbol
+        let url = sprintf "%s/stock/real-time-price/%s" (apiPath ()) symbol
         async {
             let! response = Http.AsyncRequestString url
             return Decode.fromString (Decode.field "price" Decode.float) response
@@ -52,7 +53,7 @@ module Finance =
         |> Async.RunSynchronously
 
     let getCryptoAsync ticker =
-        let url = sprintf "%s/api/v3/cryptocurrency/%s" baseUrl ticker
+        let url = sprintf "%s/cryptocurrency/%s" (apiPath ()) ticker
         async {
             let! response = Http.AsyncRequestString url
             return Decode.fromString (Decode.field "price" Decode.float) response
