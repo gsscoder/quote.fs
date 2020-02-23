@@ -36,20 +36,20 @@ let printIndex(index : Index) =
     indent "Change" index.Change
     true
 
-type infoType =
+type InfoType =
     | Indexes
     | Symbol
     | RealTimePrice
     | Crypto
 
-type options = {
+type Options = {
     [<Option('s', "symbol", HelpText = "Prints the detail of a stock quote", SetName = "symbol")>]
     symbol : string
     [<Option('r', "realtime-price", HelpText = "Prints the real time price a stock quote", SetName = "realtime-price")>]
     realTime : string
     [<Option('c', "crypto", HelpText = "Prints the price a cryptocurrency", SetName = "crypto")>]
     crypto : string
-} with member this.getInfoType = 
+} with member this.GetInfoType = 
                     if isNull this.symbol |> not
                     then Symbol
                     elif isNull this.realTime |> not
@@ -59,24 +59,24 @@ type options = {
                     else Indexes // no quote given, means makor indexes
 
 [<Literal>]
-let exitOK = 0
+let private ExitOk = 0
 [<Literal>]
-let exitFail = 1
+let private ExitFail = 1
 
 let subCommand input fc fp =
     match fc input with
     | Ok data ->
         fp data
-        exitOK
+        ExitOk
     | _ ->
-        exitFail
+        ExitFail
 
 [<EntryPoint>]
 let main argv =
     let result = CommandLine.Parser.Default.ParseArguments argv
     match result  with
-        | :? Parsed<options> as parsed -> 
-                match parsed.Value.getInfoType with
+        | :? Parsed<Options> as parsed -> 
+                match parsed.Value.GetInfoType with
                     | Symbol ->
                         subCommand parsed.Value.symbol getStockQuote printQuote
                     | RealTimePrice ->
@@ -92,8 +92,8 @@ let main argv =
                                     true
                                 | _ -> error (sprintf "Can not gather details for cryptocurrency %s" crypto)
                                 )
-                            if results |> Seq.contains false then exitFail
-                            else exitOK
+                            if results |> Seq.contains false then ExitFail
+                            else ExitOk
                         | _ -> subCommand parsed.Value.crypto getCrypto (printCrypto parsed.Value.crypto)
                     | _ ->
                         let results = majorIndexes |> Seq.map (fun index ->
@@ -102,6 +102,6 @@ let main argv =
                             | Ok index -> printIndex index
                             | _ -> error (sprintf "Can not gather details for index %s" index)
                             )
-                        if results |> Seq.contains false then exitFail
-                        else exitOK
-        | _ -> exitFail
+                        if results |> Seq.contains false then ExitFail
+                        else ExitOk
+        | _ -> ExitFail
