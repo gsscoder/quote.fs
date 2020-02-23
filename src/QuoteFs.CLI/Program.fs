@@ -74,7 +74,7 @@ let subCommand input fc fp =
 [<EntryPoint>]
 let main argv =
     let result = CommandLine.Parser.Default.ParseArguments argv
-    match result  with
+    match result with
         | :? Parsed<Options> as parsed -> 
                 match parsed.Value.GetInfoType with
                     | Symbol ->
